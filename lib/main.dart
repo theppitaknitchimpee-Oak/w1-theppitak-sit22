@@ -49,8 +49,8 @@ class MyHomePage extends StatelessWidget {
             decoration: const BoxDecoration( // ใช้ตกแต่งกล่อง
               color: Color(0xFF1565C0), // ใส่สีพื้นหลัง (สีน้ำเงินเข้ม)
               borderRadius: BorderRadius.only( // สั่งให้มุมโค้งมน
-                bottomLeft: Radius.circular(30), // โค้งมุมซ้ายล่าง
-                bottomRight: Radius.circular(30), // โค้งมุมขวาล่าง
+                bottomLeft: Radius.circular(3), // โค้งมุมซ้ายล่าง
+                bottomRight: Radius.circular(3), // โค้งมุมขวาล่าง
               ),
             ),
             child: Column( // เรียงเนื้อหาในส่วนหัว (ข้อความ -> รูป -> ชื่อ)
@@ -91,7 +91,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  "student.id@e-tech.ac.th",
+                  "theppitak.nitchimpee@e-tech.ac.th",
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.white70, // สีขาวแบบจางๆ นิดหน่อย
@@ -152,7 +152,7 @@ class MyHomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             Text("วันเกิด", style: TextStyle(color: Colors.grey)),
-                            Text("26 กันยายน 25xx", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            Text("06 กุมภาพันธ์ 2006", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ],
@@ -238,28 +238,39 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-// ================== เริ่มต้นส่วนของ หน้าที่ 2 (SecondPage) ==================
+// ================== (SecondPage) ==================
 
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
+
+  // รายการ URL รูปภาพทั้งหมด (9 รูป) ที่รวบรวมมาจากลิงก์ Pinterest
+  final List<String> imageUrls = const [
+    "https://i.pinimg.com/1200x/71/33/85/71338549c0b909614424bf81c345071c.jpg",
+    "https://i.pinimg.com/736x/d9/12/4e/d9124e0ba3e7179a1833da49dec5546e.jpg",
+    "https://i.pinimg.com/736x/7b/fc/37/7bfc3717931bab5fdd81161ba013a9aa.jpg",
+    "https://i.pinimg.com/736x/b3/a4/19/b3a4193287ae96dc8fd4b86fe7e4cbb2.jpg",
+    "https://i.pinimg.com/1200x/ca/07/1a/ca071a34a3cebb4a986e80b73b31bb5f.jpg",
+    "https://i.pinimg.com/736x/d5/85/3a/d5853aeb4f7d60d4f8b4d70c26abc776.jpg",
+    "https://i.pinimg.com/736x/bf/2d/b5/bf2db50e1a5f8d4b41957e57ad32ffd6.jpg",
+    "https://i.pinimg.com/originals/1a/4c/5b/1a4c5bb4855f4d06caa78471692c5f9a.gif",
+    "https://i.pinimg.com/736x/0e/82/8d/0e828d25efbbd8a5ebb4690160e506af.jpg",
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // --- ส่วนหัว (AppBar) ธีมสีน้ำเงินตามหน้าแรก ---
+      // --- ส่วนหัว (AppBar) ธีมสีน้ำเงิน ---
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1565C0), // สีน้ำเงินเข้ม (ธีมเดียวกับหน้า 1)
+        backgroundColor: const Color(0xFF1565C0),
         elevation: 0,
-        // ปุ่มย้อนกลับสีขาว (เพราะพื้นหลังเป็นน้ำเงินแล้ว)
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context); // ย้อนกลับหน้าแรก
           },
         ),
-        // เพิ่มชื่อหน้าหน่อยจะได้ไม่โล่ง (สีขาว)
         title: const Text(
           "โปรไฟล์",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -274,7 +285,7 @@ class SecondPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              // --- ส่วนที่ 1: ข้อมูลโปรไฟล์ ---
+              // --- ส่วนที่ 1: ข้อมูลโปรไฟล์ (รูปภาพ + สถิติ) ---
               Row(
                 children: [
                   // รูปโปรไฟล์
@@ -285,7 +296,6 @@ class SecondPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 20),
-
                   // สถิติต่างๆ
                   Expanded(
                     child: Row(
@@ -299,7 +309,6 @@ class SecondPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 15),
 
               // --- ส่วนที่ 2: ชื่อและติ๊กถูก ---
@@ -320,18 +329,17 @@ class SecondPage extends StatelessWidget {
                   Text(" lnwza007", style: TextStyle(color: Colors.grey[600])),
                 ],
               ),
-
               const SizedBox(height: 20),
 
-              // --- ส่วนที่ 3: ปุ่มกด (เปลี่ยนเป็นธีมสีน้ำเงิน) ---
+              // --- ส่วนที่ 3: ปุ่มกด (ติดตาม & แชร์) ---
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1565C0), // [แก้] สีน้ำเงิน (ธีมหน้าแรก)
-                        foregroundColor: Colors.white, // ตัวหนังสือสีขาว
+                        backgroundColor: const Color(0xFF1565C0),
+                        foregroundColor: Colors.white,
                         elevation: 0,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
@@ -339,13 +347,12 @@ class SecondPage extends StatelessWidget {
                         ),
                       ),
                       child: const Text(
-                        "ติดตาม", // หรือ Follow
+                        "ติดตาม",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                   const SizedBox(width: 10),
-
                   // ปุ่มแชร์ (กรอบ)
                   Container(
                     padding: const EdgeInsets.all(10),
@@ -357,50 +364,31 @@ class SecondPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
 
-              // --- ส่วนที่ 4: ตารางรูปภาพ (กลับมาใช้แบบอาจารย์: 2 ช่อง + ขอบมน) ---
-              GridView.count(
-                crossAxisCount: 2, // [แก้] กลับเป็น 2 ช่องตามต้นฉบับ
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisSpacing: 10, // เว้นระยะห่างมาตรฐาน
-                mainAxisSpacing: 10,
-                childAspectRatio: 3 / 4, // [แก้] สัดส่วน 3:4 (แนวตั้ง) เหมือนปกคลิป
-
-                children: [
-                  // รูปที่ 1
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8), // [แก้] ใส่ขอบมนกลับมา
+              // --- ส่วนที่ 4: ตารางรูปภาพ (GridView.builder) ---
+              // GridView.builder เหมาะกับการแสดงรายการรูปภาพจาก List/Array
+              GridView.builder(
+                shrinkWrap: true, // กำหนดให้ GridView ใช้พื้นที่เท่าที่จำเป็น (สำคัญมากเมื่ออยู่ใน SingleChildScrollView)
+                physics: const NeverScrollableScrollPhysics(), // ปิดการ Scroll ของ GridView
+                // กำหนดโครงสร้างของตารางรูปภาพ
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // **แสดง 3 รูปต่อแถว** ตามที่ผู้ใช้ร้องขอ
+                  crossAxisSpacing: 8, // ระยะห่างระหว่างรูปในแนวนอน
+                  mainAxisSpacing: 8, // ระยะห่างระหว่างรูปในแนวตั้ง
+                  childAspectRatio: 2.8 / 3.8, // สัดส่วนของแต่ละช่อง (กว้าง 3, สูง 4) เพื่อให้รูปเป็นแนวตั้ง
+                ),
+                itemCount: imageUrls.length, // จำนวนรูปภาพที่จะแสดง (จาก List ที่เราเตรียมไว้)
+                itemBuilder: (context, index) {
+                  // สร้าง Widget สำหรับรูปภาพแต่ละรูป
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(2), // ขอบมน
                     child: Image.network(
-                      "https://i.pinimg.com/236x/3a/63/7b/3a637b1260ba40d468172836bc71d441.jpg",
-                      fit: BoxFit.cover,
+                      imageUrls[index], // ดึง URL รูปภาพจาก List โดยใช้ index
+                      fit: BoxFit.cover, // ให้รูปภาพขยายเต็มพื้นที่ช่องโดยไม่เสียสัดส่วน
                     ),
-                  ),
-                  // รูปที่ 2
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8), // ขอบมน
-                    child: Image.network(
-                      "https://i.pinimg.com/236x/e7/a0/f4/e7a0f49016c7560e6d593fb14021432c.jpg",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  // รูปที่ 3 (Placeholder)
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  // รูปที่ 4 (Placeholder)
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ],
           ),
