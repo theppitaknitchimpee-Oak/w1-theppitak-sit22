@@ -1,14 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // import: การ "เบิกของ" เอาชุดเครื่องมือสร้าง UI ของ Google มาใช้
 
-void main() {
-  runApp(const MyApp());
+void main() { // void: ฟังก์ชันนี้ทำเสร็จแล้วจบเลย ไม่ต้องส่งค่าอะไรกลับมา (No return)
+  runApp(const MyApp()); // runApp: คำสั่ง "สตาร์ทเครื่อง" บอกให้เริ่มรันแอปที่ Widget ตัวนี้
 }
 
+// extends: การ "สืบทอด" คุณสมบัติ บอกว่า MyApp คือลูกของ StatelessWidget (ขอยืมความสามารถพ่อมาใช้)
 class MyApp extends StatelessWidget {
+
+  // const: บอกคอมฯ ว่า "ค่านี้จะนิ่งสนิทตลอดกาล" ช่วยให้แอปทำงานเร็วขึ้น (Performance)
+  // super.key: ส่งรหัสบัตรประชาชน (Key) ไปให้คลาสแม่ (Super class) ช่วยจัดการ
   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
+  @override // @override: คำสั่ง "เขียนทับ" บอกว่าเราไม่เอาฟังก์ชัน build แบบเดิมๆ ของพ่อ แต่จะเขียนใหม่เองในนี้
+  Widget build(BuildContext context) { // Context: "แผนที่" บอกว่าตอนนี้เราอยู่ส่วนไหนของแอป
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -25,18 +29,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+// ================= หน้าที่ 1 (Profile สีน้ำเงิน) =================
 
-  @override
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key}); // const: ใส่เพื่อประหยัดเมมโมรี่ เพราะหน้านี้โครงสร้างไม่เปลี่ยน
+
+  @override // @override: ยืนยันว่าจะวาดหน้าจอด้วยคำสั่งข้างล่างนี้
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
+    return Scaffold( // Scaffold: โครงร่างหน้าจอมาตรฐาน (มีที่วาง AppBar, Body, etc.)
+      body: Column( // Column: Widget ที่ใช้เรียงของจาก "บนลงล่าง"
+        children: [ // children: รับของได้ "หลายชิ้น" (เป็น List [])
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-            width: double.infinity,
-            decoration: const BoxDecoration(
+            width: double.infinity, // double.infinity: ค่ากว้างที่สุดเท่าที่จะเป็นไปได้ (เต็มจอ)
+            decoration: const BoxDecoration( // const: การตกแต่งนี้ค่าคงที่ ไม่เปลี่ยน
               color: Color(0xFF1565C0),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(3),
@@ -45,7 +51,7 @@ class MyHomePage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const Text(
+                const Text( // const: ข้อความนี้เขียนแล้วเขียนเลย ไม่เปลี่ยนทีหลัง
                   "ข้อมูลส่วนตัว",
                   style: TextStyle(
                     fontSize: 24,
@@ -58,14 +64,14 @@ class MyHomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(4),
                   decoration: const BoxDecoration(
                     color: Colors.purpleAccent,
-                    shape: BoxShape.circle,
+                    shape: BoxShape.circle, // BoxShape: กำหนดรูปทรงกล่อง
                   ),
-                  child: ClipOval(
+                  child: ClipOval( // ClipOval: กรรไกรตัด Widget ให้เป็นวงกลม
                     child: Image.network(
                       "https://i.pinimg.com/736x/de/ab/ba/deabba62d809dc1b730be1babf5a1234.jpg",
                       width: 120,
                       height: 120,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.cover, // BoxFit.cover: สั่งรูปให้ขยายเต็มพื้นที่โดยไม่เสียสัดส่วน
                     ),
                   ),
                 ),
@@ -89,12 +95,13 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Expanded(
-            child: SingleChildScrollView(
+          Expanded( // Expanded: สั่งให้ "กินพื้นที่ที่เหลือทั้งหมด" (ดันให้เต็ม)
+            child: SingleChildScrollView( // Scroll: ทำให้ส่วนนี้เลื่อนขึ้นลงได้
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
+                    // --- ส่วนเบอร์โทร ---
                     Row(
                       children: [
                         Container(
@@ -116,6 +123,8 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 15),
+
+                    // --- ส่วนวันเกิด ---
                     Row(
                       children: [
                         Container(
@@ -137,6 +146,8 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 15),
+
+                    // --- ส่วนที่อยู่ ---
                     Row(
                       children: [
                         Container(
@@ -158,6 +169,8 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 15),
+
+                    // --- ส่วนการศึกษา ---
                     Row(
                       children: [
                         Container(
@@ -169,7 +182,7 @@ class MyHomePage extends StatelessWidget {
                           child: const Icon(Icons.school, color: Colors.purple, size: 28),
                         ),
                         const SizedBox(width: 15),
-                        Expanded(
+                        Expanded( // ใช้ Expanded เพื่อปัดข้อความยาวๆ ลงบรรทัดใหม่
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
@@ -183,11 +196,13 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 30),
+
+                    // --- ปุ่มเปลี่ยนหน้า ---
                     SizedBox(
                       width: double.infinity,
                       height: 50,
-                      child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/second'),
+                      child: ElevatedButton( // ElevatedButton: ปุ่มแบบมีพื้นหลังนูนขึ้นมา
+                        onPressed: () => Navigator.pushNamed(context, '/second'), // Arrow Function (=>): เขียนย่อคำสั่ง return
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1565C0),
                           foregroundColor: Colors.white,
@@ -210,9 +225,13 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+// ================= หน้าที่ 2 (Instagram Style) =================
+
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
 
+  // final: ประกาศตัวแปรที่ "ค่าห้ามเปลี่ยน" (Assign ได้ครั้งเดียวตอนเริ่มสร้าง)
+  // List<String>: ตัวแปรประเภท "รายการ" ที่ข้างในเก็บ "ข้อความ" (String) เท่านั้น
   final List<String> imageUrls = const [
     "https://i.pinimg.com/1200x/71/33/85/71338549c0b909614424bf81c345071c.jpg",
     "https://i.pinimg.com/736x/d9/12/4e/d9124e0ba3e7179a1833da49dec5546e.jpg",
@@ -235,7 +254,7 @@ class SecondPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context); // pop: คำสั่งปิดหน้านี้เพื่อย้อนกลับ
           },
         ),
         title: const Text(
@@ -248,8 +267,9 @@ class SecondPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start, // CrossAxis: แกนขวาง (แนวนอน) ให้ชิดซ้าย (Start)
             children: [
+              // --- ส่วน Header โปรไฟล์ (รูป + สถิติ) ---
               Row(
                 children: [
                   const CircleAvatar(
@@ -290,6 +310,8 @@ class SecondPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
+
+              // --- ปุ่มกด ---
               Row(
                 children: [
                   Expanded(
@@ -322,21 +344,23 @@ class SecondPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+
+              // --- ตารางรูปภาพ ---
+              GridView.builder( // Builder: สร้างของแบบ "Lazy" (สร้างเฉพาะที่มองเห็นบนจอ) ประหยัดแรม
+                shrinkWrap: true, // true: สั่งให้ GridView หดความสูงเท่าที่จำเป็น (ไม่ยืดจน Error)
+                physics: const NeverScrollableScrollPhysics(), // physics: สั่งห้าม GridView เลื่อนเอง (ป้องกันการเลื่อนซ้อนเลื่อน)
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                  crossAxisCount: 3, // Count: จำนวนคอลัมน์แนวตั้ง
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
-                  childAspectRatio: 2.8 / 3.8,
+                  childAspectRatio: 2.8 / 3.8, // Ratio: สัดส่วน กว้าง ต่อ สูง
                 ),
-                itemCount: imageUrls.length,
-                itemBuilder: (context, index) {
-                  return ClipRRect(
+                itemCount: imageUrls.length, // length: นับจำนวนรูปใน List ว่ามีกี่รูป
+                itemBuilder: (context, index) { // index: เลขลำดับ (0, 1, 2...) ว่าตอนนี้กำลังสร้างรูปที่เท่าไหร่
+                  return ClipRRect( // ClipRRect: กรรไกรตัดมุมโค้งมน (Rounded Rectangle)
                     borderRadius: BorderRadius.circular(2),
                     child: Image.network(
-                      imageUrls[index],
+                      imageUrls[index], // [] : การเข้าถึงข้อมูลใน List ทีละตัว ตามเลข index
                       fit: BoxFit.cover,
                     ),
                   );
@@ -349,18 +373,14 @@ class SecondPage extends StatelessWidget {
     );
   }
 
+  // Widget: ฟังก์ชันนี้จะส่งผลลัพธ์กลับไปเป็น Widget
+  // String number: รับค่าเข้ามาเป็นตัวหนังสือ ตั้งชื่อว่า number
   Widget _buildStatColumn(String number, String label) {
     return Column(
       children: [
-        Text(
-          number,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
+        Text(number, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-        ),
+        Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
       ],
     );
   }
