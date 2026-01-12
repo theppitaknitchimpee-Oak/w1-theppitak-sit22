@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart'; // import: การ "เบิกของ" เอาชุดเครื่องมือสร้าง UI ของ Google มาใช้
+import 'package:flutter/material.dart'; // importเครื่องมือสร้างUIของGoogleมาใช้
 
-void main() { // void: ฟังก์ชันนี้ทำเสร็จแล้วจบเลย ไม่ต้องส่งค่าอะไรกลับมา (No return)
-  runApp(const MyApp()); // runApp: คำสั่ง "สตาร์ทเครื่อง" บอกให้เริ่มรันแอปที่ Widget ตัวนี้
+void main() { // voidฟังก์ชันนี้ทำเสร็จแล้วจบเลย ไม่ต้องส่งค่าอะไรกลับมา
+  runApp(const MyApp()); // runAppบอกให้เริ่มรันแอปที่ Widget ตัวนี้
 }
 
-// extends: การ "สืบทอด" คุณสมบัติ บอกว่า MyApp คือลูกของ StatelessWidget (ขอยืมความสามารถพ่อมาใช้)
+// extends:การสืบทอดคุณสมบัติบอกว่าMyAppคือลูกของStatelessWidget(ยืมความสามารถพ่อมาใช้)
 class MyApp extends StatelessWidget {
 
-  // const: บอกคอมฯ ว่า "ค่านี้จะนิ่งสนิทตลอดกาล" ช่วยให้แอปทำงานเร็วขึ้น (Performance)
-  // super.key: ส่งรหัสบัตรประชาชน (Key) ไปให้คลาสแม่ (Super class) ช่วยจัดการ
+  // const:บอกคอมว่าค่านี้จะนิ่งสนิทช่วยให้แอปทำงานเร็วขึ้น
+  // super.key:ส่งรหัสบัตรประชาชนKeyไปให้คลาสแม่Super classช่วยจัดการ
   const MyApp({super.key});
 
-  @override // @override: คำสั่ง "เขียนทับ" บอกว่าเราไม่เอาฟังก์ชัน build แบบเดิมๆ ของพ่อ แต่จะเขียนใหม่เองในนี้
-  Widget build(BuildContext context) { // Context: "แผนที่" บอกว่าตอนนี้เราอยู่ส่วนไหนของแอป
+  @override // @override: คำสั่งเขียนทับ บอกว่าเราไม่เอาฟังก์ชัน build แบบเดิมๆของพ่อแต่จะเขียนใหม่เองในนี้
+  Widget build(BuildContext context) { // Context:แผนที่บอกว่าตอนนี้เราอยู่ส่วนไหนของแอป
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -29,19 +29,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ================= หน้าที่ 1 (Profile สีน้ำเงิน) =================
+//หน้าที่1(Profileสีน้ำเงิน)
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key}); // const: ใส่เพื่อประหยัดเมมโมรี่ เพราะหน้านี้โครงสร้างไม่เปลี่ยน
+  const MyHomePage({super.key}); // const:ใส่เพื่อประหยัดเมมโมรี่เพราะหน้านี้โครงสร้างไม่เปลี่ยน
 
-  @override // @override: ยืนยันว่าจะวาดหน้าจอด้วยคำสั่งข้างล่างนี้
+  @override // @override:ยืนยันว่าจะวาดหน้าจอด้วยคำสั่งข้างล่างนี้
   Widget build(BuildContext context) {
-    return Scaffold( // Scaffold: โครงร่างหน้าจอมาตรฐาน (มีที่วาง AppBar, Body, etc.)
-      body: Column( // Column: Widget ที่ใช้เรียงของจาก "บนลงล่าง"
-        children: [ // children: รับของได้ "หลายชิ้น" (เป็น List [])
+    return Scaffold( // Scaffold:โครงร่างหน้าจอมาตรฐาน(มีที่วาง AppBar, Body, etc.)
+      body: Column( // Column: Widgetบนลงล่าง
+        children: [ // children: รับได้หลายอย่างเป็น List []
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-            width: double.infinity, // double.infinity: ค่ากว้างที่สุดเท่าที่จะเป็นไปได้ (เต็มจอ)
+            width: double.infinity, // double.infinity:ค่ากว้างที่สุดเท่าที่จะเป็นไปได้หรือเต็มจอ
             decoration: const BoxDecoration( // const: การตกแต่งนี้ค่าคงที่ ไม่เปลี่ยน
               color: Color(0xFF1565C0),
               borderRadius: BorderRadius.only(
@@ -95,8 +95,8 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Expanded( // Expanded: สั่งให้ "กินพื้นที่ที่เหลือทั้งหมด" (ดันให้เต็ม)
-            child: SingleChildScrollView( // Scroll: ทำให้ส่วนนี้เลื่อนขึ้นลงได้
+          Expanded( // Expanded: สั่งให้ ดันพื้นที่ให้เต็ม
+            child: SingleChildScrollView( //เลื่อนขึ้นลงได้
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -281,10 +281,24 @@ class SecondPage extends StatelessWidget {
                   const SizedBox(width: 20),
                   Expanded(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround, // จัดระยะห่างให้สวยงาม
                       children: [
                         _buildStatColumn("5", "กำลังติดตาม"),
+
+                        Container(
+                          height: 35,           // ความสูงของเส้น
+                          width: 1,             // ความหนาของเส้น
+                          color: Colors.grey.shade300,
+                        ),
+
                         _buildStatColumn("828.1 K", "ผู้ติดตาม"),
+
+                        Container(
+                          height: 35,
+                          width: 1,
+                          color: Colors.grey.shade300,
+                        ),
+
                         _buildStatColumn("329.9 K", "ถูกใจ"),
                       ],
                     ),
